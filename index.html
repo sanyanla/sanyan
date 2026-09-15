@@ -108,8 +108,10 @@
 <span>关于</span>
 </div>
 <div class="markdown" id="abut">
-<p> <a href="Image/WeChat.png" rel="noopener" target="_blank">我的微信 </a>
-<p> <a href="https://qm.qq.com/q/hneDtxmXKM">我的QQ</a>
+<div class="social-links" aria-label="社交联系方式">
+<button class="social-card social-button" type="button" onclick="openSocialModal('wechat')" aria-label="打开微信二维码弹窗"><span class="social-icon wechat">微</span><span class="social-copy"><strong>我的微信</strong><span>点击打开二维码弹窗</span></span><span class="social-arrow">›</span></button>
+<button class="social-card social-button" type="button" onclick="openSocialModal('qq')" aria-label="打开QQ联系弹窗"><span class="social-icon qq">Q</span><span class="social-copy"><strong>我的 QQ</strong><span>点击打开 QQ 联系弹窗</span></span><span class="social-arrow">›</span></button>
+</div>
 <!--        <div class="rin-tr"></div>-->
 <div class="rin-card-part" id="fighting">
 <div class="rin-card-title2 mdui-typo"><a href="#fighting">#</a> 战斗力</div>
@@ -195,19 +197,28 @@
 </div>
 <p>
 <p> <a href="待开发" target="_blank">
-<img alt="sanyan" border="0" src="https://www.dmoe.cc/random.php" title="待开发"/></a></p>
+<video class="acg-random" autoplay loop muted playsinline><source src="https://t.alcy.cc/acg" type="video/mp4"></video></a></p>
 <p> </p>
 </p></div>
 </div>
 </p></p></div>
 </div>
 <script>
+                    // 导航状态：切换页面时同步高亮，刷新后也保持首页状态
+                    (function(){
+                        const links=document.querySelectorAll('.menu .list-h a');
+                        function active(i){links.forEach((el,n)=>el.classList.toggle('is-active',n===i));}
+                        window.__setNavActive=active;
+                        active(0);
+                    })();
                     function about() {
+                        if(window.__setNavActive) window.__setNavActive(1);
                         document.getElementById("about").style.display="block";
                         document.getElementById("index").style.display="none";
                     }
 
                     function index() {
+                        if(window.__setNavActive) window.__setNavActive(0);
                         document.getElementById("index").style.display="block";
                         document.getElementById("about").style.display="none";
                     }
@@ -287,6 +298,32 @@
         }
     </script>
 </div>
+<!-- 微信 / QQ 高级弹窗 -->
+<div class="social-modal" id="socialModal" aria-hidden="true">
+  <div class="social-modal-backdrop" data-close-social></div>
+  <div class="social-modal-card" role="dialog" aria-modal="true" aria-labelledby="socialModalTitle">
+    <button class="social-modal-close" type="button" aria-label="关闭" data-close-social>×</button>
+    <div class="social-modal-glow"></div>
+    <div class="social-modal-icon" id="socialModalIcon">微</div>
+    <div class="social-modal-title" id="socialModalTitle">我的微信</div>
+    <div class="social-modal-subtitle" id="socialModalSubtitle">扫码添加好友</div>
+    <div class="wechat-qr-wrap" id="wechatQrWrap"><img src="Image/WeChat.png" alt="微信二维码" class="wechat-qr"><div class="qr-hint">使用微信扫一扫</div></div>
+    <div class="qq-panel" id="qqPanel" hidden><div class="qq-avatar"><img src="https://q1.qlogo.cn/g?b=qq&amp;nk=2902606178&amp;s=640" alt="QQ头像"></div><div class="qq-name">QQ 联系</div><div class="qq-desc">点击下方按钮打开官方 QQ 联系页面</div></div>
+    <div class="social-modal-actions"><button class="modal-secondary" type="button" data-close-social>关闭</button><a class="modal-primary" id="qqOpenLink" href="" target="_blank" rel="noopener noreferrer" hidden>打开 QQ</a></div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal=document.getElementById('socialModal'); if(!modal) return;
+  const title=document.getElementById('socialModalTitle'), subtitle=document.getElementById('socialModalSubtitle'), icon=document.getElementById('socialModalIcon');
+  const qr=document.getElementById('wechatQrWrap'), qqp=document.getElementById('qqPanel'), qql=document.getElementById('qqOpenLink');
+  const qqUrl='https://qm.qq.com/q/hneDtxmXKM';
+  let lastTrigger=null; function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('social-modal-lock');if(lastTrigger){lastTrigger.focus();lastTrigger=null;}}
+  window.openSocialModal=function(type){lastTrigger=document.activeElement;const isQQ=type==='qq';title.textContent=isQQ?'我的 QQ':'我的微信';subtitle.textContent=isQQ?'连接我的 QQ，打开官方联系页面':'扫码添加好友';icon.textContent=isQQ?'Q':'微';icon.classList.toggle('is-qq',isQQ);qr.hidden=isQQ;qqp.hidden=!isQQ;qql.hidden=!isQQ;qql.href=qqUrl;modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('social-modal-lock');setTimeout(()=>modal.querySelector(isQQ?'#qqOpenLink':'.social-modal-close').focus(),60);};
+  modal.querySelectorAll('[data-close-social]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close();});
+})();
+</script>
 <!--初音未来开始-->
 <style>
     .cywl {

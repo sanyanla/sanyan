@@ -478,13 +478,7 @@ body {
     font-size: 15px;
     letter-spacing: .5px;
 }
-.merged-sidebar .widget-title:before {
-    width: 8px;
-    height: 8px;
-    top: 19px;
-    right: 48px;
-    box-shadow: 14px 0 #fbc606, 28px 0 #36af42;
-}
+.merged-sidebar .widget-title:before{content:none!important;}
 .merged-sidebar .widget-box,
 .merged-sidebar .card-content { background: transparent !important; }
 .merged-sidebar iframe { border-radius: 0 0 18px 18px; }
@@ -571,3 +565,114 @@ body {
         transition-duration: .01ms !important;
     }
 }
+
+
+/* 微信 / QQ 社交卡片美化 */
+.social-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 8px}
+.social-card{position:relative;display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid rgba(255,255,255,.24);border-radius:18px;text-decoration:none!important;color:inherit!important;background:linear-gradient(135deg,rgba(255,255,255,.20),rgba(255,255,255,.07));box-shadow:0 10px 30px rgba(20,20,40,.10),inset 0 1px 0 rgba(255,255,255,.28);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.social-card:before{content:"";position:absolute;inset:-60%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 55%);transform:translateX(-35%);transition:transform .45s ease}
+.social-card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(20,20,40,.18),inset 0 1px 0 rgba(255,255,255,.38);border-color:rgba(255,255,255,.45)}
+.social-card:hover:before{transform:translateX(35%)}
+.social-icon{position:relative;z-index:1;width:46px;height:46px;min-width:46px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:22px;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.16)}
+.social-icon.wechat{background:linear-gradient(145deg,#20c978,#0e9f5b)}
+.social-icon.qq{background:linear-gradient(145deg,#4ca7ff,#2675e8)}
+.social-copy{position:relative;z-index:1;min-width:0;text-align:left}.social-copy strong{display:block;font-size:15px;line-height:1.3}.social-copy span{display:block;margin-top:3px;font-size:12px;opacity:.68;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.social-arrow{position:relative;z-index:1;margin-left:auto;font-size:18px;opacity:.5;transition:transform .25s ease,opacity .25s ease}.social-card:hover .social-arrow{transform:translateX(3px);opacity:.9}
+@media(max-width:600px){.social-links{grid-template-columns:1fr;gap:10px}.social-card{padding:13px 14px}.social-icon{width:43px;height:43px;min-width:43px}}
+
+/* 微信 / QQ 真正弹窗式高级效果 */
+.social-button{font:inherit;width:100%;cursor:pointer;text-align:left}
+.social-modal{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .28s ease,visibility .28s ease}
+.social-modal.is-open{visibility:visible;opacity:1;pointer-events:auto}.social-modal-backdrop{position:absolute;inset:0;background:rgba(8,12,24,.52);backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%)}
+.social-modal-card{position:relative;width:min(430px,100%);padding:32px 28px 24px;border:1px solid rgba(255,255,255,.42);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(255,255,255,.48));box-shadow:0 35px 100px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.85);backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);transform:translateY(18px) scale(.96);transition:transform .35s cubic-bezier(.2,.8,.2,1)}.social-modal.is-open .social-modal-card{transform:translateY(0) scale(1)}
+.social-modal-glow{position:absolute;width:190px;height:190px;top:-95px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(51,205,142,.24),transparent 68%);pointer-events:none}.social-modal-close{position:absolute;right:14px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.42);color:inherit;font-size:27px;line-height:1;cursor:pointer;z-index:2;transition:.2s ease}.social-modal-close:hover{transform:rotate(90deg) scale(1.06);background:rgba(255,255,255,.72)}
+.social-modal-icon{position:relative;margin:4px auto 13px;width:62px;height:62px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#20c978,#0e9f5b);color:#fff;font-weight:900;font-size:29px;box-shadow:0 15px 32px rgba(14,159,91,.27)}.social-modal-icon.is-qq{background:linear-gradient(145deg,#4ca7ff,#2675e8);box-shadow:0 15px 32px rgba(38,117,232,.27)}
+.social-modal-title{text-align:center;font-size:23px;font-weight:800}.social-modal-subtitle{text-align:center;margin:7px 0 20px;opacity:.62;font-size:13px}.wechat-qr-wrap{display:flex;flex-direction:column;align-items:center}.wechat-qr{width:min(260px,70vw);aspect-ratio:1;object-fit:cover;padding:10px;border-radius:22px;background:#fff;box-shadow:0 18px 45px rgba(0,0,0,.14)}.qr-hint{margin-top:12px;font-size:12px;opacity:.55}
+.qq-panel{text-align:center;padding:12px 0 8px}.qq-avatar{width:112px;height:112px;margin:0 auto 15px;padding:5px;border-radius:34px;background:rgba(255,255,255,.58);box-shadow:0 16px 35px rgba(38,117,232,.2)}.qq-avatar img{width:100%;height:100%;object-fit:cover;border-radius:29px}.qq-name{font-size:19px;font-weight:800}.qq-desc{margin-top:7px;font-size:13px;opacity:.62}.social-modal-actions{display:flex;gap:10px;margin-top:22px}.modal-secondary,.modal-primary{flex:1;height:46px;border-radius:15px;border:1px solid rgba(255,255,255,.45);display:grid;place-items:center;text-decoration:none;font:inherit;font-weight:700;cursor:pointer;box-sizing:border-box}.modal-secondary{background:rgba(255,255,255,.4);color:inherit}.modal-primary{background:linear-gradient(135deg,#4ca7ff,#2675e8);color:#fff;box-shadow:0 10px 25px rgba(38,117,232,.24)}.modal-secondary:hover,.modal-primary:hover{transform:translateY(-2px)}.social-modal-lock{overflow:hidden}
+@media(max-width:600px){.social-modal{padding:14px}.social-modal-card{padding:28px 20px 20px;border-radius:26px}.wechat-qr{width:min(250px,76vw)}}
+@media(prefers-reduced-motion:reduce){.social-modal,.social-modal-card{transition:none!important}}
+
+/* ===== SANYAN DETAIL POLISH v2 ===== */
+:root{
+  --s-accent:#f596aa;
+  --s-violet:#a89bfa;
+  --s-ink:#252536;
+  --s-muted:rgba(37,37,54,.62);
+  --s-line:rgba(255,255,255,.48);
+  --s-glass:rgba(255,255,255,.48);
+  --s-ease:cubic-bezier(.22,.8,.22,1);
+}
+html{scroll-behavior:smooth}
+body{color:var(--s-ink);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 12% 15%,rgba(245,150,170,.14),transparent 28%),radial-gradient(circle at 88% 18%,rgba(168,155,250,.14),transparent 30%),radial-gradient(circle at 55% 100%,rgba(112,201,255,.09),transparent 30%)}
+.container{position:relative;z-index:1}
+/* 顶部导航更精致 */
+.menu{position:relative;isolation:isolate;border:1px solid rgba(255,255,255,.52)!important;background:linear-gradient(135deg,rgba(255,255,255,.52),rgba(255,255,255,.20))!important;box-shadow:0 14px 42px rgba(36,35,65,.12),inset 0 1px 0 rgba(255,255,255,.72)!important}
+.menu:after{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.22) 48%,transparent 65%);background-size:220% 100%;animation:sMenuShine 7s ease-in-out infinite}
+.menu .list-h a{position:relative;transition:transform .28s var(--s-ease),background .28s ease,filter .28s ease}
+.menu .list-h a:after{content:"";position:absolute;left:50%;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--s-accent);opacity:0;transform:translate(-50%,4px) scale(.5);transition:.25s var(--s-ease);box-shadow:0 0 12px rgba(245,150,170,.65)}
+.menu .list-h a:hover{transform:translateY(-3px)}
+.menu .list-h a:hover:after,.menu .list-h a.is-active:after{opacity:1;transform:translate(-50%,0) scale(1)}
+.menu .list-h a.is-active{background:rgba(255,255,255,.16);border-radius:16px}
+.menu .list-h a p{position:relative;z-index:1;font-weight:650;letter-spacing:.4px}
+/* 内容卡片：增加真实层次 */
+.merged-main>.page{box-shadow:0 26px 80px rgba(30,30,55,.13),0 2px 10px rgba(30,30,55,.05),inset 0 1px 0 rgba(255,255,255,.72)!important}
+.content .header img{transition:transform .55s var(--s-ease),box-shadow .55s ease;will-change:transform}
+.content .header:hover img{transform:translateY(-5px) scale(1.035) rotate(1deg);box-shadow:0 22px 55px rgba(245,150,170,.22)}
+.quote{position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 12px 32px rgba(42,39,70,.06)}
+.quote:before{content:"";position:absolute;width:180px;height:180px;right:-80px;top:-100px;border-radius:50%;background:radial-gradient(circle,rgba(245,150,170,.20),transparent 68%);pointer-events:none}
+.quote:after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent)}
+.quote p{color:var(--s-muted);line-height:1.9}
+.segment{position:relative;overflow:hidden;box-shadow:0 12px 34px rgba(35,34,60,.055),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .35s var(--s-ease),box-shadow .35s ease}
+.segment:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(35,34,60,.09),inset 0 1px 0 rgba(255,255,255,.7)}
+.segment .label{letter-spacing:1px;font-weight:800}
+.segment .label:after{content:"";display:inline-block;width:18px;height:2px;margin-left:9px;vertical-align:middle;border-radius:9px;background:currentColor;opacity:.35}
+/* 社交卡片更像产品级组件 */
+.social-links{gap:16px;margin:20px 0 18px}
+.social-card{min-height:78px!important;border-color:rgba(255,255,255,.52)!important;background:linear-gradient(135deg,rgba(255,255,255,.43),rgba(255,255,255,.13))!important;box-shadow:0 12px 30px rgba(25,24,50,.08),inset 0 1px 0 rgba(255,255,255,.72)!important}
+.social-card:after{content:"";position:absolute;top:0;left:-70%;width:42%;height:100%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);transition:left .7s var(--s-ease)}
+.social-card:hover:after{left:125%}
+.social-icon{box-shadow:0 10px 22px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.35)!important}
+.social-copy strong{letter-spacing:.2px}
+.social-arrow{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.24)}
+/* 技能条 */
+.rin-card-title2{font-weight:850!important;letter-spacing:.6px}
+.mdui-progress{height:8px!important;border-radius:99px!important;background:rgba(40,40,60,.07)!important;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.07)}
+.rin-progress-title{font-size:13px!important;color:rgba(37,37,54,.74)}
+/* 侧栏 */
+.merged-sidebar .widget-title{letter-spacing:1px!important;font-weight:800!important;display:flex;align-items:center;gap:9px}
+.merged-sidebar .widget-title:after{content:"";order:2;margin-left:auto;margin-right:14px;width:7px;height:7px;border-radius:50%;background:#ff5f57;box-shadow:11px 0 #febc2e,22px 0 #28c840;opacity:.85}
+.merged-sidebar .widget-box{padding:3px!important}
+/* 页脚 */
+#footer{position:relative;margin-top:8px}
+#footer .site-info{padding:14px 12px 24px;border-top:1px solid rgba(255,255,255,.28);font-size:12px;line-height:1.9}
+#footer .site-info a{font-weight:650;transition:opacity .2s ease}
+#footer .site-info a:hover{opacity:.65}
+/* 音乐按钮 */
+.cywl{filter:drop-shadow(0 10px 22px rgba(0,0,0,.14));transition:transform .35s var(--s-ease),filter .35s ease}
+.cywl:hover{transform:translateY(-5px) scale(1.04)!important;filter:drop-shadow(0 15px 30px rgba(0,0,0,.2))}
+/* 弹窗再精修 */
+.social-modal-backdrop{background:rgba(12,14,27,.55)!important}
+.social-modal-card{overflow:hidden!important}
+.social-modal-card:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.30),transparent 38%,rgba(255,255,255,.08));}
+.social-modal-card:after{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);opacity:.8}
+.social-modal-title,.social-modal-subtitle,.wechat-qr-wrap,.qq-panel,.social-modal-actions,.social-modal-icon,.social-modal-close{position:relative;z-index:1}
+.wechat-qr{box-shadow:0 20px 55px rgba(24,24,45,.17),0 0 0 1px rgba(0,0,0,.035)!important}
+.modal-primary,.modal-secondary{transition:transform .25s var(--s-ease),box-shadow .25s ease,background .25s ease}
+.modal-primary:hover{box-shadow:0 14px 32px rgba(38,117,232,.30)}
+.modal-secondary:hover{box-shadow:0 10px 24px rgba(30,30,50,.08)}
+/* 滚动条 */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{border:3px solid transparent;background-clip:padding-box;border-radius:99px;background-color:rgba(80,78,105,.25)}
+::-webkit-scrollbar-thumb:hover{background-color:rgba(80,78,105,.42)}
+@keyframes sMenuShine{0%,55%{background-position:220% 0}78%,100%{background-position:-20% 0}}
+@media(max-width:767px){
+  .menu:after{display:none}.menu .list-h a.is-active{background:rgba(255,255,255,.22)}
+  .social-links{gap:11px}.social-card{min-height:70px!important}
+  .segment:hover{transform:none}
+  #footer .site-info{padding-bottom:28px}
+}
+@media(prefers-reduced-motion:reduce){.menu:after,.social-card:after{animation:none!important;display:none}.content .header img,.segment,.social-card,.cywl{transition:none!important}}
+
+
+.acg-random{width:100%;height:235px;object-fit:cover;border-radius:20px;display:block;overflow:hidden;}
