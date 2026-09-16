@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>友链 | 三乄言</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+min-height:100vh;
+padding:45px 25px;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+color:#46505f;
+background:
+radial-gradient(circle at 15% 10%,rgba(150,220,255,.55),transparent 35%),
+radial-gradient(circle at 85% 85%,rgba(255,190,230,.5),transparent 35%),
+linear-gradient(135deg,#f8fbff,#eef4ff);
+}
+.wrap{max-width:1200px;margin:auto}
+.glass{
+background:rgba(255,255,255,.45);
+backdrop-filter:blur(35px);
+border:1px solid rgba(255,255,255,.8);
+border-radius:45px;
+padding:55px;
+box-shadow:0 35px 100px rgba(100,130,180,.18);
+}
+.title{text-align:center}
+.title h1{
+font-size:52px;
+margin:0;
+letter-spacing:3px;
+background:linear-gradient(90deg,#667eea,#c084fc);
+-webkit-background-clip:text;
+color:transparent;
+}
+.title p{opacity:.65;font-size:17px;margin-top:12px}
+
+.cards{
+margin-top:55px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:28px;
+}
+
+.card{
+position:relative;
+overflow:hidden;
+padding:35px 25px;
+text-align:center;
+border-radius:32px;
+background:rgba(255,255,255,.55);
+border:1px solid rgba(255,255,255,.9);
+box-shadow:0 15px 45px rgba(120,150,200,.12);
+transition:.4s;
+}
+
+.card:before{
+content:"";
+position:absolute;
+width:130px;
+height:130px;
+top:-70px;
+right:-60px;
+background:rgba(180,210,255,.35);
+border-radius:50%;
+}
+
+.card:hover{
+transform:translateY(-12px);
+box-shadow:0 25px 70px rgba(120,150,220,.28);
+}
+
+.avatar{
+width:105px;
+height:105px;
+margin:auto;
+padding:7px;
+border-radius:50%;
+background:rgba(255,255,255,.7);
+box-shadow:0 10px 30px rgba(120,150,220,.2);
+}
+
+.avatar img{
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;
+}
+
+.card h2{
+margin:22px 0 10px;
+font-size:24px;
+}
+
+.card a{
+text-decoration:none;
+color:#374151;
+}
+
+.tag{
+font-size:15px;
+opacity:.7;
+}
+
+.url{
+font-size:12px;
+opacity:.45;
+word-break:break-all;
+margin-top:15px;
+}
+
+.tip{
+margin:50px auto 0;
+padding:18px 35px;
+width:max-content;
+max-width:90%;
+border-radius:999px;
+background:rgba(255,255,255,.55);
+border:1px solid rgba(255,255,255,.8);
+box-shadow:0 10px 30px rgba(120,150,200,.12);
+font-size:15px;
+letter-spacing:1px;
+}
+
+@media(max-width:600px){
+.glass{padding:30px 20px}
+.title h1{font-size:38px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="glass">
+<div class="title">
+<h1>🔗 友链</h1>
+<p>连接优秀站点 · 记录美好分享</p>
+</div>
+
+<div class="cards" id="friends"></div>
+
+<div class="tip">✨ 欢迎交换友链 · Keep creating ✨</div>
+</div>
+</div>
+
+<script>
+const friends=[
+{name:"三乄言",url:"https://sanyanla.github.io/sanyan/",icon:"https://sanyanla.github.io/sanyan/favicon.ico",desc:"个人引导页"},
+{name:"你的站点",url:"https://example.com",desc:"等待添加"},
+{name:"友情链接",url:"https://github.com",desc:"一起成长"}
+];
+
+const defaultIcon='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><defs><linearGradient id="a"><stop stop-color="#b9dcff"/><stop offset="1" stop-color="#e9c8ff"/></linearGradient></defs><circle cx="60" cy="60" r="58" fill="url(#a)"/><circle cx="60" cy="60" r="32" fill="white"/><path d="M45 60h30M60 45v30" stroke="#8aa4ff" stroke-width="6" stroke-linecap="round"/></svg>`);
+
+const box=document.getElementById("friends");
+
+friends.forEach(site=>{
+let card=document.createElement("div");
+card.className="card";
+let img=document.createElement("img");
+img.src=site.icon||new URL(site.url).origin+"/favicon.ico";
+img.onerror=()=>img.src=defaultIcon;
+
+card.innerHTML=`
+<div class="avatar"></div>
+<h2><a href="${site.url}" target="_blank">${site.name}</a></h2>
+<p class="tag">${site.desc||""}</p>
+<div class="url">${site.url}</div>`;
+card.querySelector(".avatar").appendChild(img);
+box.appendChild(card);
+});
+</script>
+</body>
+</html>
