@@ -291,7 +291,27 @@
                             color: #7880b5;
                         }
                     }
-                </style>
+                
+/* 修复QQ微信弹窗导致主页无法滚动 */
+body.social-modal-lock{
+    overflow:hidden !important;
+}
+.social-modal-backdrop{
+    touch-action:auto !important;
+}
+.social-modal-card{
+    touch-action:auto !important;
+}
+#bg,
+.backstretch,
+canvas{
+    pointer-events:none !important;
+}
+.cywl{
+    pointer-events:auto;
+}
+
+</style>
 </p></div>
 </footer>
 <script>
@@ -326,8 +346,8 @@
   const title=document.getElementById('socialModalTitle'), subtitle=document.getElementById('socialModalSubtitle'), icon=document.getElementById('socialModalIcon');
   const qr=document.getElementById('wechatQrWrap'), qqp=document.getElementById('qqPanel'), qql=document.getElementById('qqOpenLink');
   const qqUrl='https://qm.qq.com/q/hneDtxmXKM';
-  let lastTrigger=null; function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('social-modal-lock');if(lastTrigger){lastTrigger.focus();lastTrigger=null;}}
-  window.openSocialModal=function(type){lastTrigger=document.activeElement;const isQQ=type==='qq';title.textContent=isQQ?'我的 QQ':'我的微信';subtitle.textContent=isQQ?'连接我的 QQ，打开官方联系页面':'扫码添加好友';icon.textContent=isQQ?'Q':'微';icon.classList.toggle('is-qq',isQQ);qr.hidden=isQQ;qqp.hidden=!isQQ;qql.hidden=!isQQ;qql.href=qqUrl;modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('social-modal-lock');setTimeout(()=>modal.querySelector(isQQ?'#qqOpenLink':'.social-modal-close').focus(),60);};
+  let lastTrigger=null; function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('social-modal-lock');document.documentElement.style.overflow='';document.body.style.overflow='';if(lastTrigger){lastTrigger.focus();lastTrigger=null;}}
+  window.openSocialModal=function(type){lastTrigger=document.activeElement;const isQQ=type==='qq';title.textContent=isQQ?'我的 QQ':'我的微信';subtitle.textContent=isQQ?'连接我的 QQ，打开官方联系页面':'扫码添加好友';icon.textContent=isQQ?'Q':'微';icon.classList.toggle('is-qq',isQQ);qr.hidden=isQQ;qqp.hidden=!isQQ;qql.hidden=!isQQ;qql.href=qqUrl;modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.remove('social-modal-lock');document.documentElement.style.overflow='';document.body.style.overflow='';setTimeout(()=>modal.querySelector(isQQ?'#qqOpenLink':'.social-modal-close').focus(),60);};
   modal.querySelectorAll('[data-close-social]').forEach(el=>el.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open'))close();});
 })();
