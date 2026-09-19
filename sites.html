@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的网站</title>
+<link rel="shortcut icon" href="./favicon.ico">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font-family:"Microsoft YaHei","Segoe UI",sans-serif;color:#111827;overflow-x:hidden;background:#f8fafc}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 20%,rgba(255,180,200,.35),transparent 30%),radial-gradient(circle at 85% 15%,rgba(160,180,255,.35),transparent 30%),linear-gradient(135deg,#fff,#f8fafc)}
+.container{max-width:1250px;margin:auto;padding:70px 24px}.hero{text-align:center;animation:up .8s ease}.hero-icon{font-size:70px;filter:drop-shadow(0 10px 20px #ccc)}h1{font-size:52px;margin:15px 0 8px;font-weight:900;letter-spacing:2px}.desc{font-size:18px;color:#64748b}
+.grid{margin-top:55px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:32px}
+.card{position:relative;display:flex;align-items:center;gap:28px;padding:32px;text-decoration:none;color:inherit;border-radius:34px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:0 25px 70px rgba(15,23,42,.12);backdrop-filter:blur(25px);overflow:hidden;transition:.35s;animation:up .7s ease}
+.card:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-40px;top:-40px;background:rgba(99,102,241,.08)}.card:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 35px 90px rgba(15,23,42,.18)}
+.logo-wrap{width:96px;height:96px;display:flex;align-items:center;justify-content:center;border-radius:28px;background:white;box-shadow:0 12px 30px rgba(0,0,0,.12);flex:none}.logo{width:70px;height:70px;object-fit:contain}
+.name{font-size:27px;font-weight:850;margin-bottom:10px}.info{font-size:16px;color:#475569;margin-bottom:10px}.url{font-size:13px;color:#94a3b8;word-break:break-all}.tag{display:inline-block;margin-top:12px;padding:5px 12px;border-radius:99px;background:#eef2ff;color:#4f46e5;font-size:12px}
+.footer{text-align:center;margin:80px 0 20px;color:#94a3b8}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.container{padding:40px 16px}h1{font-size:36px}.grid{grid-template-columns:1fr}.card{padding:24px;gap:18px}.logo-wrap{width:75px;height:75px}.logo{width:55px;height:55px}.name{font-size:22px}}
+</style>
+</head>
+<body><div class="bg"></div>
+<div class="container">
+<div class="hero"><div class="hero-icon">🌐</div><h1>我的网站</h1><div class="desc">探索我的互联网空间</div></div>
+<div class="grid" id="siteGrid"></div>
+<script>
+const sites = [
+ {name:'三乄言引导页',desc:'我的个人导航主页',url:'https://xn--ehqv57l.xn--fiqs8s/',tag:'个人站点'},
+ {name:'情侣网站',desc:'我的情侣小站',url:'https://love.xn--ehqv57l.xn--fiqs8s/',tag:'情侣网站'},
+ {name:'网站导航',desc:'我的网站导航',url:'https://nav.xn--ehqv57l.xn--fiqs8s',tag:'导航网站'},
+ {name:'GitHub',desc:'我的开源代码仓库',url:'https://github.com/sanyanla',tag:'开源项目'}
+ 
+
+];
+
+function getDomain(url){return new URL(url).hostname;}
+function createCard(site){
+ const domain=getDomain(site.url);
+ const icon=`https://icons.duckduckgo.com/ip3/${domain}.ico`;
+ return `<a class="card" href="${site.url}" target="_blank">
+ <div class="logo-wrap"><img class="logo" src="${icon}" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=${domain}&sz=128'"></div>
+ <div><div class="name">${site.name}</div><div class="info">${site.desc}</div><div class="url">${site.url}</div><span class="tag">${site.tag}</span></div>
+ </a>`;
+}
+document.getElementById('siteGrid').innerHTML=sites.map(createCard).join('');
+</script></div>
+<div class="footer">© 三乄言 · 我的站点导航</div>
+</div></body></html>
