@@ -163,10 +163,16 @@ img.src=site.icon||new URL(site.url).origin+"/favicon.ico";
 img.onerror=()=>img.src=defaultIcon;
 
 card.innerHTML=`
-<div class="avatar"></div>
-<h2><a href="${site.url}" target="_blank">${site.name}</a></h2>
-<p class="tag">${site.desc||""}</p>
-<div class="url">${site.url}</div>`;
+ <div class="avatar"></div>
+ <h2>${site.name}</h2>
+ <p class="tag">${site.desc||""}</p>
+ <div class="url">${site.url}</div>`;
+
+ // 点击整个友链卡片跳转
+ card.style.cursor="pointer";
+ card.onclick=()=>{
+   window.open(site.url,"_blank");
+ };
 card.querySelector(".avatar").appendChild(img);
 box.appendChild(card);
 });
